@@ -100,5 +100,35 @@ ERROR 1030 (HY000): Got error -1 from storage engine
 **上面只是一个方法，虽然可以迁移Innodb，但是出问题之后可能会引其Innodb的页损坏，所以最安全的还是直接用mysqldump、xtrabackup等进行迁移**
 https://www.cnblogs.com/zhoujinyi/p/3419142.html
 
-方法2：通过mysqldump
+# 方法2：通过mysqldump
+## 语法格式： mysqldump -u  root  -ppassword -T 目标目录  dbname  table  [ option ];         ----注意，T是大写
 
+password：表示root用户的密码，和 -p 挨着，中间没有空格；
+
+目标目录：指导出的文本文件的路径；
+
+dbname：表示数据库的名称；
+
+table：表示表的名称；
+
+option：表示附加选项，如下：
+
+--fields-terminated-by=字符串：设置字符串为字段的分隔符，默认值是“\t”；
+
+--fields-enclosed-by=字符：设置字符来括上字段的值；
+
+--fields-optionally-enclosed-by=字符：设置字符括上char、varchar、text等字符型字段；
+
+--fields-escaped-by=字符：设置转义字符；
+
+--lines-terminated-by=字符串：设置每行的结束符；
+
+------------------------------------------------------------------------------------------------------------------------------
+
+mysqldump会导出2个文件一个txt一个sql文件(只有表结构)：
+
+## **mysqldump -u root -p123 -T C:\Users\del\Desktop see cr01 --fields-terminated-by=',' --lines-terminated-by='\r\n'**
+
+字段间的分隔符号 每行的结束符
+
+![alt 图片](https://img-blog.csdnimg.cn/img_convert/5a3732fc8c7bfc20fb70363cd1463288.png)
